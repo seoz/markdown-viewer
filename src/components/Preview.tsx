@@ -10,7 +10,7 @@ interface PreviewProps {
 
 export const Preview: React.FC<PreviewProps> = ({ content }) => {
   return (
-    <div className="flex-1 overflow-y-auto bg-white p-8 md:p-12 lg:p-16 border-l border-[var(--border-app)]">
+    <div className="flex-1 overflow-y-auto bg-white p-8 md:p-12 lg:p-16">
       <div className="max-w-3xl mx-auto markdown-body">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}

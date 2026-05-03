@@ -8,9 +8,11 @@ import { Sidebar } from './components/Sidebar';
 import { Toolbar } from './components/Toolbar';
 import { Editor } from './components/Editor';
 import { Preview } from './components/Preview';
+import { ResizeHandle } from './components/ResizeHandle';
 import { Document, generateId, INITIAL_MARKDOWN } from './lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 import { Upload } from 'lucide-react';
+import { Panel, Group } from 'react-resizable-panels';
 
 export default function App() {
   const [documents, setDocuments] = useState<Document[]>([]);
@@ -181,14 +183,27 @@ export default function App() {
         />
 
         <div className="flex-1 flex overflow-hidden">
-          {(viewMode === 'both' || viewMode === 'edit') && (
+          {viewMode === 'both' ? (
+            <Group orientation="horizontal">
+              <Panel defaultSize={50} minSize={20}>
+                <Editor
+                  content={currentDoc.content}
+                  onChange={(content) => updateCurrentDoc({ content })}
+                />
+              </Panel>
+              
+              <ResizeHandle />
+              
+              <Panel defaultSize={50} minSize={20}>
+                <Preview content={currentDoc.content} />
+              </Panel>
+            </Group>
+          ) : viewMode === 'edit' ? (
             <Editor
               content={currentDoc.content}
               onChange={(content) => updateCurrentDoc({ content })}
             />
-          )}
-
-          {(viewMode === 'both' || viewMode === 'preview') && (
+          ) : (
             <Preview content={currentDoc.content} />
           )}
         </div>
