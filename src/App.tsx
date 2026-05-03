@@ -184,7 +184,7 @@ export default function App() {
 
         <div className="flex-1 flex overflow-hidden">
           {viewMode === 'both' ? (
-            <Group orientation="horizontal">
+            <Group orientation="horizontal" className="h-full w-full">
               <Panel defaultSize={50} minSize={20}>
                 <Editor
                   content={currentDoc.content}
